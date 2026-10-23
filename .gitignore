@@ -1,0 +1,16 @@
+# Local Kubernetes configuration and private overrides
+kubeconfig
+*.kubeconfig
+*-local.yaml
+*-secrets.yaml
+*.secret.yaml
+
+# Generated Helm packages and temporary output
+*.tgz
+*.log
+*.tmp
+.tmp/
+
+# Operating system files
+.DS_Store
+Thumbs.db
