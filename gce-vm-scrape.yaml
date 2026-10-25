@@ -1,0 +1,16 @@
+
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: gce-vm-node-exporter
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  staticConfigs:
+    - targets:
+        - "34.126.215.27:9100"
+      labels:
+        job: node-exporter
+        environment: dev
+        platform: gcp
