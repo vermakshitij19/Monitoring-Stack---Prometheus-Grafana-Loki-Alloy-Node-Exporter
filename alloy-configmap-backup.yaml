@@ -1,0 +1,39 @@
+apiVersion: v1
+data:
+  config.alloy: |-
+    logging {
+      level = "info"
+    }
+
+    discovery.kubernetes "pods" {
+      role = "pod"
+    }
+
+    loki.source.kubernetes "pods" {
+      targets    = discovery.kubernetes.pods.targets
+      forward_to = [loki.write.local.receiver]
+    }
+
+    loki.write "local" {
+      endpoint {
+        url = "http://loki-gateway.monitoring.svc.cluster.local/loki/api/v1/push"
+      }
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: alloy
+    meta.helm.sh/release-namespace: monitoring
+  creationTimestamp: "2026-10-21T19:40:54Z"
+  labels:
+    app.kubernetes.io/component: config
+    app.kubernetes.io/instance: alloy
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/part-of: alloy
+    app.kubernetes.io/version: v1.21.0
+    helm.sh/chart: alloy-1.14.0
+  name: alloy
+  namespace: monitoring
+  resourceVersion: "1792611654938943017"
+  uid: 9b9b33ec-32b2-498e-9139-ddab9be71929
